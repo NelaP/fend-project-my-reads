@@ -6,16 +6,15 @@ import PropTypes from 'prop-types'
 
 class BookList extends Component {
     static propTypes = {
-        books: PropTypes.array.isRequired
+        books: PropTypes.array.isRequired,
+        onBookShelfChange: PropTypes.func.isRequired
+
     }
-
-    // Update BookShelf
-
 
     render() {
 
         // I prefer this so we can reference the books by using 'books'
-        const { books } = this.props;
+        const { books, onBookShelfChange } = this.props;
 
         // filter all books based on the SHELF i.e. category
         let booksCurrentlyReading = books.filter(book => book.shelf === "currentlyReading");
@@ -32,6 +31,7 @@ class BookList extends Component {
 
                 <div className="list-books-content">
                     <div>
+
                         <div className="bookshelf">
                             <h2 className="bookshelf-title">Currently Reading</h2>
                             <div className="bookshelf-books">
@@ -48,9 +48,9 @@ class BookList extends Component {
                                                     }}></div>
 
                                                     <div className="book-shelf-changer">
-                                                        <select>
+                                                        <select name="bookShelf" onChange={(event) => onBookShelfChange(book, event.target.value)}>
                                                             <option value="none" disabled>Move to...</option>
-                                                            <option value="currentlyReading" selected="selected">Currently Reading</option>
+                                                            <option selected value="currentlyReading" >Currently Reading</option>
                                                             <option value="wantToRead">Want to Read</option>
                                                             <option value="read">Read</option>
                                                             <option value="none">None</option>
@@ -86,10 +86,10 @@ class BookList extends Component {
                                                     }}></div>
 
                                                     <div className="book-shelf-changer">
-                                                        <select>
+                                                        <select name="bookShelf" onChange={(event) => onBookShelfChange(book, event.target.value)}>
                                                             <option value="none" disabled>Move to...</option>
                                                             <option value="currentlyReading">Currently Reading</option>
-                                                            <option value="wantToRead" selected="selected"> Want to Read</option>
+                                                            <option selected value="wantToRead"> Want to Read</option>
                                                             <option value="read">Read</option>
                                                             <option value="none">None</option>
                                                         </select>
@@ -122,11 +122,11 @@ class BookList extends Component {
                                                     }}></div>
 
                                                     <div className="book-shelf-changer">
-                                                        <select>
+                                                        <select onChange={(event) => onBookShelfChange(book, event.target.value)}>
                                                             <option value="none" disabled>Move to...</option>
                                                             <option value="currentlyReading">Currently Reading</option>
                                                             <option value="wantToRead">Want to Read</option>
-                                                            <option value="read" selected="selected">Read</option>
+                                                            <option selected value="read">Read</option>
                                                             <option value="none">None</option>
                                                         </select>
                                                     </div>

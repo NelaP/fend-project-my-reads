@@ -17,18 +17,39 @@ class BooksApp extends React.Component {
     books: []
   }
 
-  // Get all Books
+  // Get all Books from API
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
     })
   }
 
+  // Update a Book and Change its shelf (DB and UI)
+  onBookShelfChange = (book, shelf) => {
+
+    // How do I update the UI?
+    console.log('attempting to update UI and DB');
+    console.log(book);
+    console.log(shelf);
+
+    // Update the Database via the API
+    BooksAPI.update(book, shelf).then(book => {
+      this.setState(state => ({
+        books: state.books.update
+      }))
+    })
+  }
+
+
+
   render() {
     return (
       <div>
         <Route exact path='/' render={() => (
-          <BookList books={this.state.books}/>
+          <BookList
+            books={this.state.books}
+            onBookShelfChange={this.onBookShelfChange}
+          />
         )} />
         <Route path='/search' render={({ history }) => (
           <BookSearch />
