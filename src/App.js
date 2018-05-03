@@ -15,8 +15,8 @@ import BookSearch from './BookSearch'
 class BooksApp extends React.Component {
 
   state = {
-    books: []
-
+    books: [],
+    booksSearchResults: []
   }
 
   // Get all Books from API
@@ -24,6 +24,34 @@ class BooksApp extends React.Component {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
     })
+
+    BooksAPI.getAll().then((booksSearchResults) => {
+      this.setState({ booksSearchResults })
+    })
+  }
+
+
+  getSearchResults = (searchQuery) => {
+
+    console.log(searchQuery)
+
+    // Search the API 
+    // Then set state of BookSearchResults
+    BooksAPI.search(searchQuery)
+      .then(() => {
+
+        this.setState(state => ({
+          books: state.booksSearchResults
+
+        }))
+      })
+
+      //
+      .then(() => {
+        console.log('testing');
+      })
+
+
   }
 
 
@@ -42,8 +70,8 @@ class BooksApp extends React.Component {
           // console.log(bookChanged.id);
           if (element.id === bookChanged.id) {
             element.shelf = newShelf
-            console.log('shelf changed')
-            console.log(element)
+            //  console.log('shelf changed')
+            //  console.log(element)
           } // End of IF
 
         }) // END: For Each      
@@ -52,7 +80,7 @@ class BooksApp extends React.Component {
 
 
       .then(() => {
-        console.log('shelf changed check')
+        // console.log('shelf changed check')
         this.setState(state => ({
           books: state.books
         }))
@@ -63,19 +91,32 @@ class BooksApp extends React.Component {
 
 
 
+
+
+
+
   render() {
+
     return (
+
       <div>
+
         <Route exact path='/' render={() => (
           <BookList
             books={this.state.books}
             onBookShelfChange={this.onBookShelfChange}
           />
         )} />
+
         <Route path='/search' render={({ history }) => (
-          <BookSearch />
+          <BookSearch
+            books={this.state.booksSearchResults}
+            onBookShelfChange={this.onBookShelfChange}
+            getSearchResults={this.getSearchResults}
+          />
         )} />
-      </div>
+
+      </div >
     )
   }
 }
