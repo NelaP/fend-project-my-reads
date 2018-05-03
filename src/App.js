@@ -55,7 +55,7 @@ class BooksApp extends React.Component {
       .then(() => {
         console.log('shelf changed check')
         this.setState(state => ({
-          books: state.books.update
+          books: state.books
         }))
 
       }) // then Arrow Function

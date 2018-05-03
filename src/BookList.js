@@ -18,9 +18,9 @@ class BookList extends Component {
         const { books, onBookShelfChange } = this.props;
 
         // filter all books based on the SHELF i.e. category
-        const booksCurrentlyReading = books.filter(book => book.shelf === "currentlyReading");
-        const booksWantToRead = books.filter(book => book.shelf === "wantToRead");
-        const booksRead = books.filter(book => book.shelf === "read");
+        let booksCurrentlyReading = books.filter(book => book.shelf === "currentlyReading");
+        let booksWantToRead = books.filter(book => book.shelf === "wantToRead");
+        let booksRead = books.filter(book => book.shelf === "read");
 
         return (
 
