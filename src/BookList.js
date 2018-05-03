@@ -6,12 +6,7 @@ import PropTypes from 'prop-types'
 
 class BookList extends Component {
 
-    super(props) {
-        this.state = {
-            books: props.books
-        }
-    }
-
+    // Ensure we receive the properties as expected
     static propTypes = {
         books: PropTypes.array.isRequired,
         onBookShelfChange: PropTypes.func.isRequired

@@ -25,20 +25,43 @@ class BooksApp extends React.Component {
   }
 
   // Update a Book and Change its shelf (DB and UI)
-  onBookShelfChange = (book, shelf) => {
+  onBookShelfChange = (bookChanged, newShelf) => {
 
     // How do I update the UI?
     console.log('attempting to update UI and DB');
-    console.log(book);
-    console.log(shelf);
+    console.log(bookChanged);
+    console.log(newShelf);
 
     // Update the Database via the API
     // If suscesssful then update the UI
-    BooksAPI.update(book, shelf).then(book => {
+    // API Updated now to update UI
+    // loop through the books[] and find the book that was changed
+    // then set the shelf value to new value
+    BooksAPI.update(bookChanged, newShelf)    
+    
+    // Promise returned true
+    .then(bookChanged, newShelf => {
+
+      this.state.books.forEach(function (element) {
+        // console.log(element.id);
+        // console.log(bookChanged.id);
+        if (element.id === bookChanged.id) {
+          element.shelf = newShelf
+          console.log('shelf changed')
+          console.log(element)
+        } // End of IF
+
+      }) // END: of for Each
+
       this.setState(state => ({
-        books: state.books.update
+        books: this.state.books.update
       }))
-    })
+
+
+    } // END: THEN Arrow Function
+
+    )
+
   }
 
 
