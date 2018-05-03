@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-// import escapeRegExp from 'escape-string-regexp'
-// import sortBy from 'sort-by'
+import sortBy from 'sort-by'
 
 class BookList extends Component {
 
@@ -14,13 +13,18 @@ class BookList extends Component {
 
     render() {
 
-        // I prefer this so we can reference the books by using 'books'
+        // Preference: Reference the books by using 'books' instead of this.props.books
         const { books, onBookShelfChange } = this.props;
 
         // filter all books based on the SHELF i.e. category
         let booksCurrentlyReading = books.filter(book => book.shelf === "currentlyReading");
         let booksWantToRead = books.filter(book => book.shelf === "wantToRead");
         let booksRead = books.filter(book => book.shelf === "read");
+
+        // Sort the Books by Title
+        booksCurrentlyReading.sort(sortBy('title'))
+        booksWantToRead.sort(sortBy('title'))
+        booksRead.sort(sortBy('title'))
 
         return (
 

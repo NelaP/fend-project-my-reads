@@ -13,8 +13,10 @@ import BookSearch from './BookSearch'
 
 
 class BooksApp extends React.Component {
+
   state = {
     books: []
+
   }
 
   // Get all Books from API
@@ -24,13 +26,9 @@ class BooksApp extends React.Component {
     })
   }
 
+
   // Update a Book and Change its shelf (DB and UI)
   onBookShelfChange = (bookChanged, newShelf) => {
-
-    // How do I update the UI?
-    console.log('attempting to update UI and DB')
-    // console.log(bookChanged);
-    // console.log(newShelf);
 
     // Update the Database via the API
     // Then: Update the Books []
@@ -48,9 +46,10 @@ class BooksApp extends React.Component {
             console.log(element)
           } // End of IF
 
-        }) // End of for Each      
+        }) // END: For Each      
 
-      }) // then Arrow Function
+      }) // END: Arrow Function
+
 
       .then(() => {
         console.log('shelf changed check')
@@ -58,9 +57,7 @@ class BooksApp extends React.Component {
           books: state.books
         }))
 
-      }) // then Arrow Function
-
-
+      }) // END: Arrow Function
 
   }
 
