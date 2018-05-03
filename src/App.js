@@ -28,39 +28,39 @@ class BooksApp extends React.Component {
   onBookShelfChange = (bookChanged, newShelf) => {
 
     // How do I update the UI?
-    console.log('attempting to update UI and DB');
-    console.log(bookChanged);
-    console.log(newShelf);
+    console.log('attempting to update UI and DB')
+    // console.log(bookChanged);
+    // console.log(newShelf);
 
     // Update the Database via the API
-    // If suscesssful then update the UI
-    // API Updated now to update UI
-    // loop through the books[] and find the book that was changed
-    // then set the shelf value to new value
-    BooksAPI.update(bookChanged, newShelf)    
-    
-    // Promise returned true
-    .then(bookChanged, newShelf => {
+    // Then: Update the Books []
+    // Then: Update the State
+    BooksAPI.update(bookChanged, newShelf)
 
-      this.state.books.forEach(function (element) {
-        // console.log(element.id);
-        // console.log(bookChanged.id);
-        if (element.id === bookChanged.id) {
-          element.shelf = newShelf
-          console.log('shelf changed')
-          console.log(element)
-        } // End of IF
+      .then(() => {
 
-      }) // END: of for Each
+        this.state.books.forEach(function (element) {
+          // console.log(element.id);
+          // console.log(bookChanged.id);
+          if (element.id === bookChanged.id) {
+            element.shelf = newShelf
+            console.log('shelf changed')
+            console.log(element)
+          } // End of IF
 
-      this.setState(state => ({
-        books: this.state.books.update
-      }))
+        }) // End of for Each      
+
+      }) // then Arrow Function
+
+      .then(() => {
+        console.log('shelf changed check')
+        this.setState(state => ({
+          books: state.books.update
+        }))
+
+      }) // then Arrow Function
 
 
-    } // END: THEN Arrow Function
-
-    )
 
   }
 
