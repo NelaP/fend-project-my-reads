@@ -5,10 +5,16 @@ import PropTypes from 'prop-types'
 // import sortBy from 'sort-by'
 
 class BookList extends Component {
+
+    super(props) {
+        this.state = {
+            books: props.books
+        }
+    }
+
     static propTypes = {
         books: PropTypes.array.isRequired,
         onBookShelfChange: PropTypes.func.isRequired
-
     }
 
     render() {
@@ -17,9 +23,9 @@ class BookList extends Component {
         const { books, onBookShelfChange } = this.props;
 
         // filter all books based on the SHELF i.e. category
-        let booksCurrentlyReading = books.filter(book => book.shelf === "currentlyReading");
-        let booksWantToRead = books.filter(book => book.shelf === "wantToRead");
-        let booksRead = books.filter(book => book.shelf === "read");
+        const booksCurrentlyReading = books.filter(book => book.shelf === "currentlyReading");
+        const booksWantToRead = books.filter(book => book.shelf === "wantToRead");
+        const booksRead = books.filter(book => book.shelf === "read");
 
         return (
 
@@ -48,9 +54,9 @@ class BookList extends Component {
                                                     }}></div>
 
                                                     <div className="book-shelf-changer">
-                                                        <select name="bookShelf" onChange={(event) => onBookShelfChange(book, event.target.value)}>
+                                                        <select value="currentlyReading" onChange={(event) => onBookShelfChange(book, event.target.value)}>
                                                             <option value="none" disabled>Move to...</option>
-                                                            <option selected value="currentlyReading" >Currently Reading</option>
+                                                            <option value="currentlyReading" >Currently Reading</option>
                                                             <option value="wantToRead">Want to Read</option>
                                                             <option value="read">Read</option>
                                                             <option value="none">None</option>
@@ -86,10 +92,10 @@ class BookList extends Component {
                                                     }}></div>
 
                                                     <div className="book-shelf-changer">
-                                                        <select name="bookShelf" onChange={(event) => onBookShelfChange(book, event.target.value)}>
+                                                        <select value="wantToRead" onChange={(event) => onBookShelfChange(book, event.target.value)}>
                                                             <option value="none" disabled>Move to...</option>
                                                             <option value="currentlyReading">Currently Reading</option>
-                                                            <option selected value="wantToRead"> Want to Read</option>
+                                                            <option value="wantToRead"> Want to Read</option>
                                                             <option value="read">Read</option>
                                                             <option value="none">None</option>
                                                         </select>
@@ -122,11 +128,11 @@ class BookList extends Component {
                                                     }}></div>
 
                                                     <div className="book-shelf-changer">
-                                                        <select onChange={(event) => onBookShelfChange(book, event.target.value)}>
+                                                        <select value="read" onChange={(event) => onBookShelfChange(book, event.target.value)}>
                                                             <option value="none" disabled>Move to...</option>
                                                             <option value="currentlyReading">Currently Reading</option>
                                                             <option value="wantToRead">Want to Read</option>
-                                                            <option selected value="read">Read</option>
+                                                            <option value="read">Read</option>
                                                             <option value="none">None</option>
                                                         </select>
                                                     </div>

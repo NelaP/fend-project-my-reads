@@ -33,6 +33,7 @@ class BooksApp extends React.Component {
     console.log(shelf);
 
     // Update the Database via the API
+    // If suscesssful then update the UI
     BooksAPI.update(book, shelf).then(book => {
       this.setState(state => ({
         books: state.books.update
