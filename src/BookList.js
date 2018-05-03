@@ -42,7 +42,6 @@ class BookList extends Component {
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
 
-                                    {console.log(booksCurrentlyReading)}
                                     {booksCurrentlyReading.map((book) => (
                                         <li key={book.id}>
                                             <div className="book">
@@ -53,7 +52,7 @@ class BookList extends Component {
                                                     }}></div>
 
                                                     <div className="book-shelf-changer">
-                                                        <select value="currentlyReading" onChange={(event) => onBookShelfChange(book, event.target.value)}>
+                                                        <select value={book.shelf} onChange={(event) => onBookShelfChange(book, event.target.value)}>
                                                             <option value="none" disabled>Move to...</option>
                                                             <option value="currentlyReading" >Currently Reading</option>
                                                             <option value="wantToRead">Want to Read</option>
@@ -91,7 +90,7 @@ class BookList extends Component {
                                                     }}></div>
 
                                                     <div className="book-shelf-changer">
-                                                        <select value="wantToRead" onChange={(event) => onBookShelfChange(book, event.target.value)}>
+                                                        <select value={book.shelf} onChange={(event) => onBookShelfChange(book, event.target.value)}>
                                                             <option value="none" disabled>Move to...</option>
                                                             <option value="currentlyReading">Currently Reading</option>
                                                             <option value="wantToRead"> Want to Read</option>
@@ -127,7 +126,7 @@ class BookList extends Component {
                                                     }}></div>
 
                                                     <div className="book-shelf-changer">
-                                                        <select value="read" onChange={(event) => onBookShelfChange(book, event.target.value)}>
+                                                        <select value={book.shelf} onChange={(event) => onBookShelfChange(book, event.target.value)}>
                                                             <option value="none" disabled>Move to...</option>
                                                             <option value="currentlyReading">Currently Reading</option>
                                                             <option value="wantToRead">Want to Read</option>

@@ -21,7 +21,7 @@ class BookSearch extends Component {
     // Update UI
     // Call getSearchResults which will update the API
     updateQuery = (query) => {
-        this.props.getSearchResults(query);
+        this.props.getSearchResults(query.trim());
         this.setState({ query: query.trim() })
     }
 

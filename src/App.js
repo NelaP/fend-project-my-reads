@@ -38,6 +38,7 @@ class BooksApp extends React.Component {
     // Search the API 
     // Then set state of BookSearchResults
     BooksAPI.search(searchQuery)
+
       .then((booksSearchResults) => {
 
         this.setState(state => ({
@@ -50,7 +51,6 @@ class BooksApp extends React.Component {
       .then(() => {
         console.log('testing');
       })
-
 
   }
 
@@ -66,12 +66,8 @@ class BooksApp extends React.Component {
       .then(() => {
 
         this.state.books.forEach(function (element) {
-          // console.log(element.id);
-          // console.log(bookChanged.id);
           if (element.id === bookChanged.id) {
             element.shelf = newShelf
-            //  console.log('shelf changed')
-            //  console.log(element)
           } // End of IF
 
         }) // END: For Each      
