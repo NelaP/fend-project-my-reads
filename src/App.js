@@ -25,9 +25,7 @@ class BooksApp extends React.Component {
       this.setState({ books })
     })
 
-    BooksAPI.getAll().then((booksSearchResults) => {
-      this.setState({ booksSearchResults })
-    })
+
   }
 
 
@@ -42,15 +40,9 @@ class BooksApp extends React.Component {
       .then((booksSearchResults) => {
 
         this.setState(state => ({
-          booksSearchResults: state.booksSearchResults
-
+          booksSearchResults
         }))
-      })
-
-      //
-      .then(() => {
-        console.log('testing');
-      })
+      })    
 
   }
 
