@@ -106,7 +106,7 @@ class BooksApp extends React.Component {
 
         <Route path='/search' render={({ history }) => (
           <BookSearch
-            books={this.state.booksSearchResults}
+            booksSearchResults={this.state.booksSearchResults}
             onBookShelfChange={this.onBookShelfChange}
             getSearchResults={this.getSearchResults}
           />
@@ -116,5 +116,6 @@ class BooksApp extends React.Component {
     )
   }
 }
+
 
 export default BooksApp

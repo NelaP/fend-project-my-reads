@@ -8,7 +8,7 @@ class BookSearch extends Component {
 
     // Ensure we receive the properties as expected
     static propTypes = {
-        books: PropTypes.array.isRequired,
+        booksSearchResults: PropTypes.array.isRequired,
         onBookShelfChange: PropTypes.func.isRequired,
         getSearchResults: PropTypes.func.isRequired
     }
@@ -29,7 +29,7 @@ class BookSearch extends Component {
     render() {
 
         // Preference: Reference the books by using 'books' instead of this.props.books
-        const { books, onBookShelfChange } = this.props;
+        const { booksSearchResults, onBookShelfChange } = this.props;
         const { query } = this.state
 
         return (
@@ -59,7 +59,7 @@ class BookSearch extends Component {
                 <div className="search-books-results">
                     <ol className="books-grid">
 
-                        {books.map((book) => (
+                        {booksSearchResults.map((book) => (
                             <li key={book.id}>
                                 <div className="book">
                                     <div className="book-top">
