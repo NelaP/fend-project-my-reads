@@ -24,9 +24,10 @@ class BooksApp extends React.Component {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
     })
-
-
   }
+
+
+
 
 
   getSearchResults = (searchQuery) => {
@@ -37,12 +38,12 @@ class BooksApp extends React.Component {
     // Then set state of BookSearchResults
     BooksAPI.search(searchQuery)
 
-      .then((booksSearchResults) => {
+      .then(booksSearchResults => {
 
         this.setState(state => ({
           booksSearchResults
         }))
-      })    
+      })
 
   }
 
@@ -68,10 +69,13 @@ class BooksApp extends React.Component {
 
 
       .then(() => {
-        // console.log('shelf changed check')
+
         this.setState(state => ({
           books: state.books
+
+
         }))
+        console.log('shelf changed check')
 
       }) // END: Arrow Function
 
@@ -97,11 +101,14 @@ class BooksApp extends React.Component {
         )} />
 
         <Route path='/search' render={({ history }) => (
+
           <BookSearch
             booksSearchResults={this.state.booksSearchResults}
             onBookShelfChange={this.onBookShelfChange}
             getSearchResults={this.getSearchResults}
+
           />
+
         )} />
 
       </div >

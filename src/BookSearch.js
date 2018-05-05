@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import * as BooksAPI from './BooksAPI'
 
-// Coming back to the mYreads page does not re-render
-// 
 
 class BookSearch extends Component {
 
@@ -16,7 +15,7 @@ class BookSearch extends Component {
 
 
     state = {
-        query: ''
+        query: ''      
     }
 
     // Update UI
@@ -25,6 +24,16 @@ class BookSearch extends Component {
         this.props.getSearchResults(query.trim());
         this.setState({ query: query.trim() })
     }
+
+    // Take in Book ID
+    // USE API to get shelf value and return
+    getBookShelf(bookID) {
+        BooksAPI.get(bookID).then(book => {
+            console.log(book.title + ' ' + book.shelf)
+            return book.shelf
+        })
+    }
+
 
 
     render() {
@@ -50,11 +59,14 @@ class BookSearch extends Component {
 
                     </div>
                 </div>
+
+
                 <div className="search-books-results">
                     <ol className="books-grid">
 
-                        {booksSearchResults.map((book) => (
-                            <li key={book.id}>
+                        {booksSearchResults.map(book =>
+
+                            < li key={book.id} >
                                 <div className="book">
                                     <div className="book-top">
 
@@ -63,7 +75,12 @@ class BookSearch extends Component {
                                         }}></div>
 
                                         <div className="book-shelf-changer">
-                                            <select value={book.shelf} onChange={(event) => onBookShelfChange(book, event.target.value)}>
+
+                                            {console.log('api gave back = ' + book.shelf)}
+
+                                            <select
+                                                value={this.getBookShelf(book.id)}
+                                                onChange={(event) => onBookShelfChange(book, event.target.value)}>
                                                 <option value="none" disabled>Move to...</option>
                                                 <option value="currentlyReading" >Currently Reading</option>
                                                 <option value="wantToRead">Want to Read</option>
@@ -76,7 +93,8 @@ class BookSearch extends Component {
 
                                 </div>
                             </li>
-                        ))}
+                        )
+                        }
 
 
                     </ol>
