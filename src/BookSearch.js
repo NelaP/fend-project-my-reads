@@ -76,8 +76,6 @@ class BookSearch extends Component {
 
                                         <div className="book-shelf-changer">
 
-                                            {console.log('api gave back = ' + book.shelf)}
-
                                             <select
                                                 value={this.getBookShelf(book.id)}
                                                 onChange={(event) => onBookShelfChange(book, event.target.value)}>
