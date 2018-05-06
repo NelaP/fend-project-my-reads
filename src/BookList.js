@@ -11,7 +11,7 @@ class BookList extends Component {
         onBookShelfChange: PropTypes.func.isRequired
     }
 
- 
+
     render() {
 
         // Preference: Reference the books by using 'books' instead of this.props.books
@@ -80,7 +80,8 @@ class BookList extends Component {
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
 
-                                    {console.log(booksWantToRead)}
+                                    {//console.log(booksWantToRead)
+                                    }
                                     {booksWantToRead.map((book) => (
                                         <li key={book.id}>
                                             <div className="book">
@@ -116,7 +117,8 @@ class BookList extends Component {
                             <div className="bookshelf-books">
                                 <ol className="books-grid">
 
-                                    {console.log(booksRead)}
+                                    {//console.log(booksRead)
+                                    }
                                     {booksRead.map((book) => (
                                         <li key={book.id}>
                                             <div className="book">
@@ -155,13 +157,13 @@ class BookList extends Component {
                 </div>
 
 
-            </div> // End of List of Books
+            </div> // END: of List of Books
 
-        ) // End of Return
+        ) // END: of Return
 
-    } // End of Render
+    } // END: of Render
 
-} // End of Component
+} // END: of Component
 
 
 export default BookList

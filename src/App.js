@@ -33,7 +33,7 @@ class BooksApp extends React.Component {
   // For each book shelf value we must add the object back to the searchQuery
   getSearchResults = (searchQuery) => {
 
-    console.log(searchQuery)
+    // console.log(searchQuery)
 
     // Search the API 
     // Then set state of BookSearchResults
@@ -96,11 +96,7 @@ class BooksApp extends React.Component {
 
 
       .then(() => {
-
-        this.setState(state => ({
-          books: state.books
-        }))
-
+        this.setState(this.state.books)
       }) // END: Arrow Function
 
   }
@@ -120,15 +116,16 @@ class BooksApp extends React.Component {
           />
         )} />
 
-        <Route path='/search' render={({ history }) => (
-
-          <BookSearch
-            booksSearchResults={this.state.booksSearchResults}
-            onBookShelfChange={this.onBookShelfChange}
-            getSearchResults={this.getSearchResults}
-          />
-
-        )} />
+        <Route path='/search' render={
+          (history) => (
+            <BookSearch
+              booksSearchResults={this.state.booksSearchResults}
+              onBookShelfChange={this.onBookShelfChange}
+              getSearchResults={this.getSearchResults}
+            />
+          )
+        }
+        />
 
       </div >
     )

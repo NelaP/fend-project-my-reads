@@ -17,8 +17,7 @@ class BookSearch extends Component {
 
 
     state = {
-        query: '',
-        currentBookShelf: ''
+        query: ''
     }
 
     // Update Search Bar
@@ -42,7 +41,7 @@ class BookSearch extends Component {
 
                     <Link
                         className='close-search'
-                        to='/'>Back to Home                        
+                        to='/'>Back to Home
                     </Link>
 
                     <div className="search-books-input-wrapper">
