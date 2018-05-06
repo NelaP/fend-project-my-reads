@@ -39,37 +39,32 @@ class BooksApp extends React.Component {
     // Then set state of BookSearchResults
     BooksAPI.search(searchQuery)
 
-      // Result Set Returned
+      // Result Set returned of all books as per the search parameters
       .then(booksSearchResults => {
         return booksSearchResults
       })
 
-      // Get Book IDs for each book in Result Set
-      // We now need to fetch the Book Shelf value for each Book
-      // The value for each shelf needs to be appended to the Result Set
-      // Once completed we then set the state
+      // Process each book in the params
       .then(booksSearchResults => {
 
+        // Get Book IDs for each book in Result Set
         let resultSet = booksSearchResults.map(b => b.id);
         let bookRequests = [];
 
-        console.log(resultSet)
-
+        // Fetch each book as per the ID and add to new BookRequests Object
         resultSet.forEach(function (b) {
           bookRequests.push(BooksAPI.get(b))
         })
 
-        return Promise.all(bookRequests).then(function (resultSet) {
-          console.log(resultSet);
-
-          ///Update the booksSearchResults Result with appended book shelf values
-          return resultSet
-        })
+        return Promise.all(bookRequests)
+          .then(newResultSet => {
+            ///Return the new ResultSet Object
+            return newResultSet
+          })
       })
 
+      // Once completed we then set the state to update the UI
       .then(booksSearchResults => {
-
-        console.log('testing this 2')
 
         this.setState(state => ({
           booksSearchResults
@@ -79,13 +74,6 @@ class BooksApp extends React.Component {
   } // End of getSearchResults
 
 
-  /*
-   BooksAPI.get(bookID).then(book => {
-            console.log(book.title + ' ' + book.shelf)
-            
-            this.setState({currentBookShelf: book.shelf.toString() })
-        })
-        */
 
   // Update a Book and Change its shelf (DB and UI)
   onBookShelfChange = (bookChanged, newShelf) => {
@@ -111,10 +99,7 @@ class BooksApp extends React.Component {
 
         this.setState(state => ({
           books: state.books
-
-
         }))
-        console.log('shelf changed check')
 
       }) // END: Arrow Function
 

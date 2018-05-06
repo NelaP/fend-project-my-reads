@@ -18,7 +18,7 @@ class BookSearch extends Component {
 
     state = {
         query: '',
-        currentBookShelf : ''
+        currentBookShelf: ''
     }
 
     // Update Search Bar
@@ -27,7 +27,7 @@ class BookSearch extends Component {
         this.setState({ query: query.trim() })
     }
 
-   
+
     render() {
 
         // Preference: Reference the books by using 'books' instead of this.props.books
@@ -40,7 +40,10 @@ class BookSearch extends Component {
 
                 <div className="search-books-bar">
 
-                    <Link className='close-search' to='/'>Back to Home</Link>
+                    <Link
+                        className='close-search'
+                        to='/'>Back to Home                        
+                    </Link>
 
                     <div className="search-books-input-wrapper">
 

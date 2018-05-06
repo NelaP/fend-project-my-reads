@@ -12,7 +12,6 @@ class BookList extends Component {
     }
 
  
-
     render() {
 
         // Preference: Reference the books by using 'books' instead of this.props.books
