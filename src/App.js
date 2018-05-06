@@ -27,6 +27,10 @@ class BooksApp extends React.Component {
   }
 
 
+
+  // Search API based on input Query
+  // For each book returned we need to get the book shelf value
+  // For each book shelf value we must add the object back to the searchQuery
   getSearchResults = (searchQuery) => {
 
     console.log(searchQuery)
@@ -35,14 +39,53 @@ class BooksApp extends React.Component {
     // Then set state of BookSearchResults
     BooksAPI.search(searchQuery)
 
+      // Result Set Returned
       .then(booksSearchResults => {
+        return booksSearchResults
+      })
+
+      // Get Book IDs for each book in Result Set
+      // We now need to fetch the Book Shelf value for each Book
+      // The value for each shelf needs to be appended to the Result Set
+      // Once completed we then set the state
+      .then(booksSearchResults => {
+
+        let resultSet = booksSearchResults.map(b => b.id);
+        let bookRequests = [];
+
+        console.log(resultSet)
+
+        resultSet.forEach(function (b) {
+          bookRequests.push(BooksAPI.get(b))
+        })
+
+        return Promise.all(bookRequests).then(function (resultSet) {
+          console.log(resultSet);
+
+          ///Update the booksSearchResults Result with appended book shelf values
+          return resultSet
+        })
+      })
+
+      .then(booksSearchResults => {
+
+        console.log('testing this 2')
+
         this.setState(state => ({
           booksSearchResults
         }))
       })
 
-  }
+  } // End of getSearchResults
 
+
+  /*
+   BooksAPI.get(bookID).then(book => {
+            console.log(book.title + ' ' + book.shelf)
+            
+            this.setState({currentBookShelf: book.shelf.toString() })
+        })
+        */
 
   // Update a Book and Change its shelf (DB and UI)
   onBookShelfChange = (bookChanged, newShelf) => {
