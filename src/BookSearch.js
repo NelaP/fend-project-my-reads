@@ -19,7 +19,8 @@ class BookSearch extends Component {
 
 
     state = {
-        query: ''
+        query: '',
+        currentBookShelf : ''
     }
 
     // Update Search Bar
@@ -28,18 +29,7 @@ class BookSearch extends Component {
         this.setState({ query: query.trim() })
     }
 
-    // Take in Book ID
-    // USE API to get shelf value and return
-    // Call getSearchResults which will update the API
-    getBookShelf(bookID) {
-        BooksAPI.get(bookID).then(book => {
-            console.log(book.title + ' ' + book.shelf)
-            return book.shelf.toString()
-        })
-    }
-
-
-
+   
     render() {
 
         // Preference: Reference the books by using 'books' instead of this.props.books
@@ -81,7 +71,7 @@ class BookSearch extends Component {
                                         <div className="book-shelf-changer">
 
                                             <select
-                                                value={this.getBookShelf(book.id)}
+                                                value={book.shelf}
                                                 onChange={(event) => onBookShelfChange(book, event.target.value)}>
                                                 <option value="none" disabled>Move to...</option>
                                                 <option value="currentlyReading" >Currently Reading</option>
