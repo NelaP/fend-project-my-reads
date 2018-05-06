@@ -19,11 +19,10 @@ class BookSearch extends Component {
 
 
     state = {
-        query: ''      
+        query: ''
     }
 
-    // Update UI
-    // Call getSearchResults which will update the API
+    // Update Search Bar
     updateQuery = (query) => {
         this.props.getSearchResults(query.trim());
         this.setState({ query: query.trim() })
@@ -31,6 +30,7 @@ class BookSearch extends Component {
 
     // Take in Book ID
     // USE API to get shelf value and return
+    // Call getSearchResults which will update the API
     getBookShelf(bookID) {
         BooksAPI.get(bookID).then(book => {
             console.log(book.title + ' ' + book.shelf)

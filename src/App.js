@@ -27,9 +27,6 @@ class BooksApp extends React.Component {
   }
 
 
-
-
-
   getSearchResults = (searchQuery) => {
 
     console.log(searchQuery)
@@ -39,7 +36,6 @@ class BooksApp extends React.Component {
     BooksAPI.search(searchQuery)
 
       .then(booksSearchResults => {
-
         this.setState(state => ({
           booksSearchResults
         }))
@@ -83,10 +79,6 @@ class BooksApp extends React.Component {
 
 
 
-
-
-
-
   render() {
 
     return (
@@ -106,7 +98,6 @@ class BooksApp extends React.Component {
             booksSearchResults={this.state.booksSearchResults}
             onBookShelfChange={this.onBookShelfChange}
             getSearchResults={this.getSearchResults}
-
           />
 
         )} />
