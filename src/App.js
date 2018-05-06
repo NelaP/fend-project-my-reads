@@ -27,7 +27,6 @@ class BooksApp extends React.Component {
   }
 
 
-
   // Search API based on input Query
   // For each book returned we need to get the book shelf value
   // For each book shelf value we must add the object back to the searchQuery
@@ -47,20 +46,30 @@ class BooksApp extends React.Component {
       // Process each book in the params
       .then(booksSearchResults => {
 
-        // Get Book IDs for each book in Result Set
-        let resultSet = booksSearchResults.map(b => b.id);
-        let bookRequests = [];
+        console.log('books reuslt ' + booksSearchResults)
 
-        // Fetch each book as per the ID and add to new BookRequests Object
-        resultSet.forEach(function (b) {
-          bookRequests.push(BooksAPI.get(b))
-        })
+        if (booksSearchResults != null) {
 
-        return Promise.all(bookRequests)
-          .then(newResultSet => {
-            ///Return the new ResultSet Object
-            return newResultSet
+          // Get Book IDs for each book in Result Set
+          let resultSet = booksSearchResults.map(b => b.id);
+          let bookRequests = [];
+
+          // Fetch each book as per the ID and add to new BookRequests Object
+          resultSet.forEach(function (b) {
+            bookRequests.push(BooksAPI.get(b))
           })
+
+          return Promise.all(bookRequests)
+            .then(newResultSet => {
+              ///Return the new ResultSet Object
+              return newResultSet
+            })
+        }
+        else{
+          console.log('books results empty')
+          return booksSearchResults = []
+        }
+
       })
 
       // Once completed we then set the state to update the UI
