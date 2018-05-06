@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import * as BooksAPI from './BooksAPI'
 
 // TODO
 // Re-render page when going back to main page
-// BUG: Search Results - the select is not reflecting the value from the API
 
 
 class BookSearch extends Component {
