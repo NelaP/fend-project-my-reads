@@ -46,7 +46,7 @@ class BooksApp extends React.Component {
       // Process each book in the params
       .then(booksSearchResults => {
 
-        console.log('books reuslt ' + booksSearchResults)
+        // console.log('books reuslt ' + booksSearchResults)
 
         if (booksSearchResults != null) {
 
@@ -66,7 +66,7 @@ class BooksApp extends React.Component {
             })
         }
         else{
-          console.log('books results empty')
+          // console.log('books results empty')
           return booksSearchResults = []
         }
 
