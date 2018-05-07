@@ -98,6 +98,7 @@ class BooksApp extends React.Component {
 
           // console.log('books results empty')
           else {
+
             return booksSearchResults = []
           }
 
