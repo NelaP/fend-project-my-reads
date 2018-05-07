@@ -94,8 +94,10 @@ class BooksApp extends React.Component {
                 ///Return the new ResultSet Object
                 return newResultSet
               })
-          } else {
-            // console.log('books results empty')
+          }
+
+          // console.log('books results empty')
+          else {
             return booksSearchResults = []
           }
 
@@ -135,8 +137,15 @@ class BooksApp extends React.Component {
 
 
       .then(() => {
-        this.setState(this.state.books)
+        this.setState(() => {
+          return {
+            books: this.state.books
+          }
+        })
+
       }) // END: Arrow Function
+
+
 
   }
 
@@ -154,11 +163,16 @@ class BooksApp extends React.Component {
               onBookShelfChange={this.onBookShelfChange}
             />
             )
+          }
         />
 
-      </div >
+        <Route path='/search' render={(history) => (<
+          BookSearch booksSearchResults={this.state.booksSearchResults}
+          onBookShelfChange={this.onBookShelfChange}
+          getSearchResults={this.getSearchResults}
         />)
         } />
+
       </div>
     )
   }
