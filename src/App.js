@@ -1,5 +1,7 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import {
+  Route
+} from 'react-router-dom'
 
 // APIs
 import * as BooksAPI from './BooksAPI'
@@ -22,7 +24,9 @@ class BooksApp extends React.Component {
   // Get all Books from API
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      this.setState({ books })
+      this.setState({
+        books
+      })
     })
   }
 
@@ -32,53 +36,79 @@ class BooksApp extends React.Component {
   // For each book shelf value we must add the object back to the searchQuery
   getSearchResults = (searchQuery) => {
 
-    // console.log(searchQuery)
+    // If the user cleared the search, we don't need to show or process anything but simply update the state of the searchResults
+    if (searchQuery === '') {
 
-    // Search the API 
-    // Then set state of BookSearchResults
-    BooksAPI.search(searchQuery)
-
-      // Result Set returned of all books as per the search parameters
-      .then(booksSearchResults => {
-        return booksSearchResults
+      this.setState(() => {
+        return {
+          booksSearchResults: []
+        }
       })
 
-      // Process each book in the params
-      .then(booksSearchResults => {
+    } else {
 
-        // console.log('books reuslt ' + booksSearchResults)
+      // Search the API. Then set state of BookSearchResults to used later
+      BooksAPI.search(searchQuery)
 
-        if (booksSearchResults != null) {
+        // Result Set returned of all books as per the search parameters
+        .then(booksSearchResults => {
+          return booksSearchResults
+        })
 
-          // Get Book IDs for each book in Result Set
-          let resultSet = booksSearchResults.map(b => b.id);
-          let bookRequests = [];
+        // THEN: Process the Search Results
+        .then(booksSearchResults => {
 
-          // Fetch each book as per the ID and add to new BookRequests Object
-          resultSet.forEach(function (b) {
-            bookRequests.push(BooksAPI.get(b))
-          })
+          let responsePositive = true
 
-          return Promise.all(bookRequests)
-            .then(newResultSet => {
-              ///Return the new ResultSet Object
-              return newResultSet
+          // Check if the response is not empty
+          let resultsExist = booksSearchResults != null ? true : false
+          if (!resultsExist) {
+            responsePositive = false
+            console.log("Results were undefined")
+          }
+
+          // If response was not empty we now need to check if response is VALID
+          if (responsePositive) {
+            let isValid = Object.entries(booksSearchResults)[0][0] === 'error' ? false : true
+            if (!isValid) {
+              responsePositive = false
+              console.log("Invalid Search Paramters")
+            }
+          }
+
+          // If response was not undefined nor was invalid we can continue
+          // Process each book in the params          
+          if (responsePositive) {
+
+            // Get Book IDs for each book in Result Set
+            let resultSet = booksSearchResults.map(b => b.id)
+            let bookRequests = []
+
+            // Fetch each book as per the ID and add to new BookRequests Object
+            resultSet.forEach(function (b) {
+              bookRequests.push(BooksAPI.get(b))
             })
-        }
-        else{
-          // console.log('books results empty')
-          return booksSearchResults = []
-        }
 
-      })
+            return Promise.all(bookRequests)
+              .then(newResultSet => {
+                ///Return the new ResultSet Object
+                return newResultSet
+              })
+          } else {
+            // console.log('books results empty')
+            return booksSearchResults = []
+          }
 
-      // Once completed we then set the state to update the UI
-      .then(booksSearchResults => {
+        })
 
-        this.setState(state => ({
-          booksSearchResults
-        }))
-      })
+        // Once completed we then set the state to update the UI
+        .then(booksSearchResults => {
+
+          this.setState(state => ({
+            booksSearchResults
+          }))
+        })
+    }
 
   } // End of getSearchResults
 
@@ -118,25 +148,18 @@ class BooksApp extends React.Component {
 
       <div>
 
-        <Route exact path='/' render={() => (
-          <BookList
-            books={this.state.books}
-            onBookShelfChange={this.onBookShelfChange}
-          />
-        )} />
-
-        <Route path='/search' render={
-          (history) => (
-            <BookSearch
-              booksSearchResults={this.state.booksSearchResults}
+        <Route exact path='/'
+          render={
+            () => (<BookList books={this.state.books}
               onBookShelfChange={this.onBookShelfChange}
-              getSearchResults={this.getSearchResults}
             />
-          )
-        }
+            )
         />
 
       </div >
+        />)
+        } />
+      </div>
     )
   }
 }
