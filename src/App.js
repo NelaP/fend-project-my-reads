@@ -45,7 +45,10 @@ class BooksApp extends React.Component {
         }
       })
 
-    } else {
+    }
+
+    // Search not Empty
+    else {
 
       // Search the API. Then set state of BookSearchResults to used later
       BooksAPI.search(searchQuery)
@@ -88,6 +91,9 @@ class BooksApp extends React.Component {
             resultSet.forEach(function (b) {
               bookRequests.push(BooksAPI.get(b))
             })
+
+
+
 
             return Promise.all(bookRequests)
               .then(newResultSet => {
@@ -158,13 +164,12 @@ class BooksApp extends React.Component {
 
       <div>
 
-        <Route exact path='/'
-          render={
-            () => (<BookList books={this.state.books}
-              onBookShelfChange={this.onBookShelfChange}
-            />
-            )
-          }
+        <Route exact path='/' render={() => (
+        <BookList books={this.state.books}
+          onBookShelfChange={this.onBookShelfChange}
+        />
+        )
+        }
         />
 
         <Route path='/search' render={(history) => (<

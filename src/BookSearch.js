@@ -22,8 +22,6 @@ class BookSearch extends Component {
 
     // Update Search Bar
     updateQuery = (query) => {
-
-
         this.props.getSearchResults(query.trim());
         this.setState({ query: query.trim() })
     }
@@ -35,7 +33,7 @@ class BookSearch extends Component {
         const { booksSearchResults, onBookShelfChange } = this.props;
         const { query } = this.state
 
-        console.log(booksSearchResults)
+        // console.log(booksSearchResults)
 
 
         return (

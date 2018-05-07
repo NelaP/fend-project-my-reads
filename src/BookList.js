@@ -11,12 +11,14 @@ class BookList extends Component {
         onBookShelfChange: PropTypes.func.isRequired
     }
 
+
+    // Takes in the current BookShelf and checks a book in it to see what shelf it belongs
     getBookShelfTitle(bookShelf) {
 
         let bookShelfTitle = 'Read'
         bookShelf.forEach(book => {
 
-            console.log(book)
+            // console.log(book)
             if (book.shelf === "currentlyReading") {
                 return bookShelfTitle = "Currently Reading"
             }
