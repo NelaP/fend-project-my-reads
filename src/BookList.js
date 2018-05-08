@@ -24,10 +24,11 @@ class BookList extends Component {
             }
             else if (book.shelf === "wantToRead") {
                 return bookShelfTitle = "Want to Read"
-            }            
+            }
         })
         return bookShelfTitle
     }
+
 
 
     render() {
@@ -84,9 +85,9 @@ class BookList extends Component {
                                                         }}></div>
 
                                                         <div className="book-shelf-changer">
-                                                            <select value={book.shelf} onChange={(event) => onBookShelfChange(book, event.target.value)}>
-                                                                <option value="none" disabled>Move to...</option>
-                                                                <option value="currentlyReading" >Currently Reading</option>
+                                                            <select id="custom-select-book" value={book.shelf ? book.shelf : "none"} onChange={(event) => onBookShelfChange(book, event.target.value)}>
+                                                                <option value="move" disabled>Move to...</option>
+                                                                <option value="currentlyReading">Currently Reading</option>
                                                                 <option value="wantToRead">Want to Read</option>
                                                                 <option value="read">Read</option>
                                                                 <option value="none">None</option>
@@ -104,10 +105,7 @@ class BookList extends Component {
                             </div>
 
                         ))
-
                         }
-
-
 
                     </div>
                 </div>
@@ -119,6 +117,7 @@ class BookList extends Component {
 
 
             </div > // END: of List of Books
+
 
         ) // END: of Return
 

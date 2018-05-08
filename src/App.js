@@ -127,33 +127,16 @@ class BooksApp extends React.Component {
   onBookShelfChange = (bookChanged, newShelf) => {
 
     // Update the Database via the API
-    // Then: Update the Books []
-    // Then: Update the State
+    // Then: Update the Books [] by fetching it again i.e. updates the state    
     BooksAPI.update(bookChanged, newShelf)
 
       .then(() => {
-
-        this.state.books.forEach(function (element) {
-          if (element.id === bookChanged.id) {
-            element.shelf = newShelf
-          } // End of IF
-
-        }) // END: For Each      
-
-      }) // END: Arrow Function
-
-
-      .then(() => {
-        this.setState(() => {
-          return {
-            books: this.state.books
-          }
+        BooksAPI.getAll().then((books) => {
+          this.setState({
+            books
+          })
         })
-
-      }) // END: Arrow Function
-
-
-
+      }) // END: .then Arrow Function
   }
 
 
@@ -165,9 +148,9 @@ class BooksApp extends React.Component {
       <div>
 
         <Route exact path='/' render={() => (
-        <BookList books={this.state.books}
-          onBookShelfChange={this.onBookShelfChange}
-        />
+          <BookList books={this.state.books}
+            onBookShelfChange={this.onBookShelfChange}
+          />
         )
         }
         />
