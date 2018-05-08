@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-// TODO
-// Re-render page when going back to main page
-
 
 class BookSearch extends Component {
 
